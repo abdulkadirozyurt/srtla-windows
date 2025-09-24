@@ -14,11 +14,49 @@ This fork adds Windows compatibility through:
 ### Prerequisites
 - MinGW-w64 or Visual Studio with C/C++ tools
 - Git (for version information)
+- Make utility
+- Chocolatey (package manager for Windows)
+
+### Automated Dependencies Installation
+
+For the easiest setup, use the provided dependencies installer:
+
+1. **Right-click** on `install_dependencies.bat` and select **"Run as administrator"**
+2. The script will automatically install:
+   - Chocolatey (if not already installed)
+   - MinGW-w64 (includes GCC compiler)
+   - Git (for version information)
+   - Make utility
+
+The installer script will:
+- Check for existing installations to avoid duplicates
+- Only install missing components
+- Provide clear status messages throughout the process
+- Refresh environment variables automatically
+
+### Manual Installation (Alternative)
+
+If you prefer to install dependencies manually:
+
+1. **Install Chocolatey** (as Administrator):
+   ```batch
+   powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))"
+   ```
+
+2. **Install MinGW and Git**:
+   ```batch
+   choco install mingw git make -y
+   ```
 
 ### Build Steps
 ```batch
 git clone https://github.com/abdulkadirozyurt/srtla-windows.git
 cd srtla-windows
+
+# Run the dependencies installer (recommended)
+# Right-click install_dependencies.bat -> Run as administrator
+
+# Or build directly if dependencies are already installed
 make
 ```
 
